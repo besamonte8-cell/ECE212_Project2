@@ -8,5 +8,12 @@ module negate(
     If en is low, just pass in through to out unchanged.
     */
     //Do not modify above this line
-
+    always @* begin
+        case(en)
+            0: out = in;
+            1: out = (~in) + 1'b1;
+        endcase
+    end
 endmodule
+
+// Test successful!
