@@ -23,7 +23,7 @@ module sevseg_disp(
             6: segs = 8'b01111101; // A, C, D, E, F, G --> ON
             7: segs = 8'b00000111;// A, B, C --> ON
             8: segs = 8'b01111111; // all segments on except dp
-            9: segs = 8'b01100111; // A, B, C, F, G --> ON
+            9: segs = 8'b01101111; // A, B, C, D, F, G --> ON
             10: segs = 8'b01110111; // hex A = A, B, C, E, F, G --> ON
             11: segs = 8'b01111100; // hex b = C, D, E, F, G --> ON
             12: segs = 8'b00111001; // hex C = A, D, E, F --> ON
