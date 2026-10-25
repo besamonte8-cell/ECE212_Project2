@@ -20,15 +20,20 @@ module xorshift798(
     */
     //Do not modify above this line
     always @ (posedge clk) begin
-        if (seed == 0) begin
-            random = 16'h0100;
-        end
         if (reset) begin
-            random = seed;
+            if (seed == 0) begin
+                random <= 16'h0100;
+            end else begin
+                random <= seed;
+            end
         end else begin
-            random = random ^ (random << 7);
-            random = random ^ (random >> 9);
-            random = random ^ (random << 8);
+            if (seed == 0) begin
+                random <= 16'h0100;
+            end else begin
+                random <= random ^ (random << 7);
+                random <= random ^ (random >> 9);
+                random <= random ^ (random << 8);
+            end
         end
     end
 
