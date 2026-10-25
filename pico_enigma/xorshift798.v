@@ -27,14 +27,13 @@ module xorshift798(
                 random <= seed;
             end
         end else begin
-            if (seed == 0) begin
-                random <= 16'h0100;
-            end else begin
-                random <= random ^ (random << 7);
-                random <= random ^ (random >> 9);
-                random <= random ^ (random << 8);
-            end
+            reg [15:0] temp;
+            temp = random ^ (random << 7);
+            temp = temp ^ (temp >> 9);
+            random <= temp ^ (temp << 8);
         end
     end
 
 endmodule
+
+// Test successful!
