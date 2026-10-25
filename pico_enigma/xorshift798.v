@@ -19,6 +19,17 @@ module xorshift798(
     If reset is high, random will be set to seed at next clock edge
     */
     //Do not modify above this line
-
+    always @ (posedge clk) begin
+        if (seed == 0) begin
+            random = 16'h0100;
+        end
+        if (reset) begin
+            random = seed;
+        end else begin
+            random = random ^ (random << 7);
+            random = random ^ (random >> 9);
+            random = random ^ (random << 8);
+        end
+    end
 
 endmodule
