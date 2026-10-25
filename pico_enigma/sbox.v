@@ -25,7 +25,8 @@ module sbox(
                 10: out = 0;
                 11: out = 12;
                 12: out = 11;
-                14:  out = 2;
+                13: out = 2;
+                14:  out = 1;
                 15: out = 4;
             endcase
         endcase
