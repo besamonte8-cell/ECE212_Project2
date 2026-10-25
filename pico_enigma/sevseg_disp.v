@@ -52,5 +52,6 @@ module sevseg_disp(
             endcase
         endcase
     end
-
 endmodule
+
+// Test successful!
