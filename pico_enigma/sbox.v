@@ -32,3 +32,5 @@ module sbox(
         endcase
     end
 endmodule
+
+// Test successful!
