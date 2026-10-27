@@ -76,11 +76,17 @@ module main(
     );
 
     // Debounce
-    debounce db(
+    debounce db0(
         .clk(clk),
-        .btn(btn[1:0]),
-        .debounced_btn(debounced_btn)
+        .btn(btn[0]),
+        .out(db_btn0)
     );  
+
+    debounce db1(
+        .clk(clk),
+        .btn(btn[1]),
+        .out(db_btn1)
+    ); 
 
     // Swap
     swap swp(
