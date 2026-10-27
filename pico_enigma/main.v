@@ -42,15 +42,20 @@ module main(
     reg [7:0] led;
     shift_reg sreg(led, seven_seg, clk, strobe, data, shift_clk);
 
+    // Added Declarations
+    wire [1:0] debounced_btn;
+    wire enigma_clk;
+    wire [3:0] key;
+    wire [3:0] cipher_out;
+    wire [3:0] swapped_x, swapped_y;
+
     assign enigma_clk = debounced_btn[0] | debounced_btn[1];
 
     always @(*) begin
         if (btn[3]) begin
             led = sw;
-        end
-        else begin
-            led[7:4] = key;
-            led[3:0] = swapped_y;
+        end else begin
+            led = {key, swapped_y};
         end
     end
 
