@@ -10,7 +10,16 @@ module swap(
     when en is 1, x = b and y = a
     */
     //Do not modify above this line
-
+    always @() begin
+    if (en == 1'b0) begin
+        x = a;
+        y = b;
+    end
+    else begin
+        x = b;
+        y = a;
+    end
+    end
 endmodule
 
 // Nancy

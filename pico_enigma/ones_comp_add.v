@@ -9,7 +9,12 @@ module ones_comp_add(
     accessed by adding a and b and putting the result in a 5 bit reg.
     */
     //Do not modify above this line
+    reg [4:0] sum;
 
+    always @() begin
+        sum = {1'b0, a} + {1'b0, b};
+        out = sum[3:0] + sum[4];
+    end
 
 endmodule
 

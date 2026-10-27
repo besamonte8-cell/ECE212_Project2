@@ -23,7 +23,7 @@ module main(
     OR the debounced btn[0] and debounced btn[1] together to make the clock
     for enigma. This way pressing btn[1] will load the seed without also
     having to press btn[0].
-
+    
     Use the raw btn[1] as the reset, not the debounced btn[1]. The debounced
     signal changes at the same time as the clock, so enigma may not see the
     reset. The raw btn[1] will already be high when the clock edge happens.
