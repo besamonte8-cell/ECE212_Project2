@@ -43,13 +43,13 @@ module main(
     shift_reg sreg(led, seven_seg, clk, strobe, data, shift_clk);
 
     // Added Declarations
-    wire [1:0] debounced_btn;
+    wire db_btn0, db_btn1;
     wire enigma_clk;
     wire [3:0] key;
     wire [3:0] cipher_out;
     wire [3:0] swapped_x, swapped_y;
 
-    assign enigma_clk = debounced_btn[0] | debounced_btn[1];
+    assign enigma_clk = db_btn0 | db_btn1;
 
     always @(*) begin
         if (btn[3]) begin
@@ -62,7 +62,7 @@ module main(
     sevseg_disp disp(
         .in(swapped_x),
         .dp(enigma_clk),
-        .out(seven_seg)
+        .segs(seven_seg)
     );
 
     // Enigma
@@ -79,13 +79,13 @@ module main(
     debounce db0(
         .clk(clk),
         .btn(btn[0]),
-        .out(db_btn0)
+        .btn_db(db_btn0)
     );  
 
     debounce db1(
         .clk(clk),
         .btn(btn[1]),
-        .out(db_btn1)
+        .btn_db(db_btn1)
     ); 
 
     // Swap
