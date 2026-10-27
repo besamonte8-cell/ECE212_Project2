@@ -23,7 +23,7 @@ module main(
     OR the debounced btn[0] and debounced btn[1] together to make the clock
     for enigma. This way pressing btn[1] will load the seed without also
     having to press btn[0].
-    
+
     Use the raw btn[1] as the reset, not the debounced btn[1]. The debounced
     signal changes at the same time as the clock, so enigma may not see the
     reset. The raw btn[1] will already be high when the clock edge happens.
@@ -42,7 +42,48 @@ module main(
     reg [7:0] led;
     shift_reg sreg(led, seven_seg, clk, strobe, data, shift_clk);
 
+    assign enigma_clk = debounced_btn[0] | debounced_btn[1];
 
-    
+    always @(*) begin
+        if (btn[3]) begin
+            led = sw;
+        end
+        else begin
+            led[7:4] = key;
+            led[3:0] = swapped_y;
+        end
+    end
+
+    sevseg_disp disp(
+        .in(swapped_x),
+        .dp(enigma_clk),
+        .out(seven_seg)
+    );
+
+    // Enigma
+    enigma enc(
+        .clk(enigma_clk),
+        .reset(btn[1]),
+        .seed(sw),
+        .in(sw[3:0]),
+        .out(cipher_out),
+        .key(key)
+    );
+
+    // Debounce
+    debounce db(
+        .clk(clk),
+        .btn(btn[1:0]),
+        .debounced_btn(debounced_btn)
+    );  
+
+    // Swap
+    swap swp(
+        .en(btn[2]),
+        .a(cipher_out),
+        .b(sw[3:0]),
+        .x(swapped_x),
+        .y(swapped_y)
+    );
 
 endmodule
